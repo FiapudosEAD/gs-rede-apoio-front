@@ -3,9 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import { AuthProvider } from "./context/AuthContext"; 
-import AppRoutes from "./routes/appRoutes";
-import AuthRoutes from "./routes/authRoutes";
 
 //Import Páginas
 
