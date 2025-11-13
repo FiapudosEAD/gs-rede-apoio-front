@@ -1,10 +1,29 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+//Import Router e AuthProvider
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import { AuthProvider } from "./context/AuthContext"; 
+import AppRoutes from "./routes/appRoutes";
+import AuthRoutes from "./routes/authRoutes";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+//Import Páginas
+
+const router = createBrowserRouter([
+  {
+    element: <AuthRoutes />,
+    
+  },
+  {
+    element: <AppRoutes />,
+  },
+  { path: "*", element: <PageNotFound /> }, 
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </React.StrictMode>
+);
