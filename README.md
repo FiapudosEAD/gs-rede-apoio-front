@@ -1,2 +1,1 @@
-# gs-rede-apoio-front
-
+Global Solution Rede de Apoio - Frontend (React-Vite)
