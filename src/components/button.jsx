@@ -1,6 +1,6 @@
 export default function Button({ label, redirectUrl }) {
   return (
-    <button className={``}>
+    <button className="">
       {label}
       <a>{redirectUrl}</a>
     </button>
