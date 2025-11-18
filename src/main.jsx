@@ -7,9 +7,11 @@ import "./index.css";
 
 //Import Páginas
 import Home from "./pages/home.jsx";
+import WriteStory from "./pages/writeStory.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
+  { path: "/writeStory", element: <WriteStory /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

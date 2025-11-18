@@ -9,7 +9,7 @@ export default function Header() {
             </div>
             <div className="flex items-center gap-2 md:gap-6 xl:gap-10">
                 <a href="/" className="">Meus Relatos</a>
-                <Button label={"Escrever Relato"} redirectUrl={"/"}></Button>
+                <Button label={"Escrever Relato"} redirectUrl={"/writeStory"}></Button>
             </div>
         </div>
     );
