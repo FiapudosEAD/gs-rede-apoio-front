@@ -1,3 +1,5 @@
+import Button from "./button.jsx";
+
 export default function Header() {
     return (
         <header className={``}>
@@ -7,6 +9,7 @@ export default function Header() {
             </div>
             <div className={``}>
                 <a href="/">Meus Relatos</a>
+                <Button label={"Escrever Relato"} redirectUrl={"/"}></Button>
             </div>
         </header>
     );
