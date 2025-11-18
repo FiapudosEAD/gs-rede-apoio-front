@@ -9,3 +9,8 @@
   --light-blue: #C4F2FD;
   --bg-white: #F5F5F5;
 }
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--bg-white);
+}
