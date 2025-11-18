@@ -9,11 +9,15 @@ import "./index.css";
 import Home from "./pages/home.jsx";
 import WriteStory from "./pages/writeStory.jsx";
 import MyStories from "./pages/myStories.jsx";
+import StoryDetails from "./pages/storyDetails.jsx";
+import PageNotFound from "./pages/pageNotFound.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/writeStory", element: <WriteStory /> },
   { path: "/myStories", element: <MyStories /> },
+  { path: "/storyDetails", element: <StoryDetails /> },
+  { path: "*", element: <PageNotFound /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
