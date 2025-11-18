@@ -1,26 +1,19 @@
-//Import Router e AuthProvider
+//Import Router
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
+
 //Import Páginas
+import Home from "./pages/home.jsx";
 
 const router = createBrowserRouter([
-  {
-    element: <AuthRoutes />,
-    
-  },
-  {
-    element: <AppRoutes />,
-  },
-  { path: "*", element: <PageNotFound /> }, 
+  { path: "/", element: <Home /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
