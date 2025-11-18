@@ -1,7 +1,7 @@
 
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 
-export default function StoryBox({ title, likeCount, commentCount }) {
+export default function MiniStoryBox({ title, likeCount, commentCount }) {
   return (
     <div>
         <h2 className="">{title}</h2>
