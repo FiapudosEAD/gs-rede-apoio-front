@@ -3,14 +3,9 @@
 
 :root {
   --font-inter: 'Inter', sans-serif;
-  --dark-green: #022831;
-  --light-green: #B2C75C;
-  --blue: #08A2C8;
-  --light-blue: #C4F2FD;
-  --bg-white: #F5F5F5;
 }
 
 body {
   font-family: var(--font-inter);
-  background-color: var(--bg-white);
+  background-color: #f5f5f5;
 }

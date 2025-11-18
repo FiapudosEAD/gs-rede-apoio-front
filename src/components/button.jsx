@@ -1,8 +1,10 @@
 export default function Button({ label, redirectUrl }) {
   return (
-    <button className="">
+    <button 
+      className=""
+      onClick={() => window.location.href = redirectUrl}
+    >
       {label}
-      <a>{redirectUrl}</a>
     </button>
   );
 }
