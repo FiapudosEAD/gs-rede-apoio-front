@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputLabel from "../components/inputLabel.jsx";
 import Button from "../components/button.jsx";
+import api from "../services/api.js";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,15 +21,9 @@ export default function Login() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await api.post("/auth/login", formData);
 
-      const data = await response.json();
+      const data = response.json();
 
       if (response.ok && data.success) {
         localStorage.setItem("user", JSON.stringify(data.data));
@@ -38,8 +33,8 @@ export default function Login() {
         setError(data.message || "Email ou senha inválidos.");
       }
     } catch (err) {
-      console.error(err);
-      setError("Erro de conexão com o servidor.");
+      const msg = err.response?.data?.message || "Erro de conexão. Tente novamente mais tarde.";
+      setError(msg);
     }
   };
 

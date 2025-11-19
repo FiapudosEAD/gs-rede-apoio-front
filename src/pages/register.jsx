@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputLabel from "../components/inputLabel.jsx";
 import Button from "../components/button.jsx";
+import api from "../services/api";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,15 +22,8 @@ export default function Register() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
+      const response = await api.post("/auth/register", formData);
+      const data = response.data;
 
       if (response.ok && data.success) {
         alert("Cadastro realizado com sucesso!");
