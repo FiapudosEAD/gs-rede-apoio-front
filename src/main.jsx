@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import "./index.css";
 import { UserProvider } from "./contexts/UserContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx"; // Importe o componente
 
 // Importação das Páginas
 import Home from "./pages/home.jsx";
@@ -14,12 +15,45 @@ import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
+  // Rotas Públicas (Acessíveis sem login)
   { path: "/login", element: <Login /> },     
   { path: "/register", element: <Register /> },
-  { path: "/writeStory", element: <WriteStory /> },
-  { path: "/myStories", element: <MyStories /> },
-  { path: "/storyDetails", element: <StoryDetails /> },
+
+  // Rotas Protegidas (Exigem login)
+  { 
+    path: "/", 
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ) 
+  },
+  { 
+    path: "/writeStory", 
+    element: (
+      <ProtectedRoute>
+        <WriteStory />
+      </ProtectedRoute>
+    ) 
+  },
+  { 
+    path: "/myStories", 
+    element: (
+      <ProtectedRoute>
+        <MyStories />
+      </ProtectedRoute>
+    ) 
+  },
+  { 
+    path: "/storyDetails", 
+    element: (
+      <ProtectedRoute>
+        <StoryDetails />
+      </ProtectedRoute>
+    ) 
+  },
+  
+  // Página 404
   { path: "*", element: <PageNotFound /> },
 ]);
 
