@@ -52,7 +52,7 @@ export default function Register() {
         <div className="w-full max-w-md text-dark-green">
           <div className="mb-5">
             <div className="flex items-center gap-2 font-bold text-2xl mb-5">
-                <img src="../src/assets/logo.svg" alt="Logo"></img>
+                <img src="../assets/logo.svg" alt="Logo"></img>
                 <h1 className="text-3xl font-bold">Rede de Alívio</h1>
             </div>
             <h2 className="text-xl font-bold">Crie sua conta</h2>
