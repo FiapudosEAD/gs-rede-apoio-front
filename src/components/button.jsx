@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Button({ label, redirectUrl, onClick, type = "button" }) {
+  const navigate = useNavigate();
+
   const handleClick = () => {
     if (onClick) {
       onClick();
     } else if (redirectUrl) {
-      window.location.href = redirectUrl;
+      navigate(redirectUrl);
     }
   };
 

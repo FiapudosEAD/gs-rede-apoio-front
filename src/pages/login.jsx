@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import InputLabel from "../components/inputLabel.jsx";
 import Button from "../components/button.jsx";
 import api from "../services/api.js";
@@ -10,13 +10,9 @@ export default function Login() {
   const location = useLocation();
   const { login } = useUser();
   
-  // Recupera o caminho salvo ou define "/" como padrão
   const from = location.state?.from || "/";
 
-  const [formData, setFormData] = useState({
-    email: "",
-    senha: ""
-  });
+  const [formData, setFormData] = useState({ email: "", senha: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e, key) => {
@@ -34,7 +30,6 @@ export default function Login() {
       if (data.success) {
         login(data.data);
         alert("Login realizado com sucesso!");
-        // Redireciona para a página que o usuário tentou acessar
         navigate(from, { replace: true }); 
       } else {
         setError(data.message || "Email ou senha inválidos.");
@@ -60,28 +55,19 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <InputLabel 
-                placeholder="E-mail:" 
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleChange(e, "email")}
-              />
+              <InputLabel placeholder="E-mail:" type="email" value={formData.email} onChange={(e) => handleChange(e, "email")} />
             </div>
             <div>
-              <InputLabel 
-                placeholder="Senha:" 
-                type="password"
-                value={formData.senha}
-                onChange={(e) => handleChange(e, "senha")}
-              />
+              <InputLabel placeholder="Senha:" type="password" value={formData.senha} onChange={(e) => handleChange(e, "senha")} />
             </div>
 
             {error && <p className="text-red-600 font-bold text-sm text-center">{error}</p>}
 
             <div className="flex flex-col gap-3 items-center">
               <Button label="Entrar" type="submit" />
+              
               <p className="text-sm text-dark-green">
-                Novo aqui? <a href="/register" className="font-bold text-cyan-600 hover:underline">Cadastre-se</a>
+                Novo aqui? <Link to="/register" className="font-bold text-cyan-600 hover:underline">Cadastre-se</Link>
               </p>
             </div>
           </form>
