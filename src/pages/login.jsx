@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import InputLabel from "../components/inputLabel.jsx";
 import Button from "../components/button.jsx";
 import api from "../services/api.js";
+import { useUser } from "../contexts/UserContext.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useUser();
   const [formData, setFormData] = useState({
     email: "",
     senha: ""
@@ -22,11 +24,11 @@ export default function Login() {
 
     try {
       const response = await api.post("/auth/login", formData);
+      const data = response.data;
 
-      const data = response.json();
-
-      if (response.ok && data.success) {
-        localStorage.setItem("user", JSON.stringify(data.data));
+      if (data.success) {
+        // Salva na memória do contexto, não no localStorage
+        login(data.data);
         alert("Login realizado com sucesso!");
         navigate("/");
       } else {
