@@ -21,6 +21,7 @@ export default function Login() {
 
   const handleChange = (e, key) => {
     setFormData({ ...formData, [key]: e.target.value });
+    if (error) setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -33,14 +34,11 @@ export default function Login() {
 
       if (data.success) {
         login(data.data);
-        alert("Login realizado com sucesso!");
         navigate(from, { replace: true }); 
-      } else {
-        setError(data.message || "Email ou senha inválidos.");
       }
     } catch (err) {
-      const msg = err.response?.data?.message || "Erro de conexão.";
-      setError(msg);
+      const serverMessage = err.response?.data?.message;
+      setError(serverMessage || "Erro de conexão ou credenciais inválidas.");
     }
   };
 
@@ -78,7 +76,11 @@ export default function Login() {
               />
             </div>
 
-            {error && <p className="text-red-600 font-bold text-sm text-center">{error}</p>}
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative text-center text-sm font-bold">
+                    {error}
+                </div>
+            )}
 
             <div className="flex flex-col gap-3 items-center">
               <Button label="Entrar" type="submit" />
