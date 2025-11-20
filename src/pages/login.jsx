@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // 1. Importar useLocation
+import { useNavigate, useLocation } from "react-router-dom";
 import InputLabel from "../components/inputLabel.jsx";
 import Button from "../components/button.jsx";
 import api from "../services/api.js";
@@ -10,7 +10,8 @@ export default function Login() {
   const location = useLocation();
   const { login } = useUser();
   
-  const from = location.state?.from?.pathname || "/";
+  // Recupera o caminho salvo ou define "/" como padrão
+  const from = location.state?.from || "/";
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,21 +34,20 @@ export default function Login() {
       if (data.success) {
         login(data.data);
         alert("Login realizado com sucesso!");
-  
+        // Redireciona para a página que o usuário tentou acessar
         navigate(from, { replace: true }); 
       } else {
         setError(data.message || "Email ou senha inválidos.");
       }
     } catch (err) {
-      const msg = err.response?.data?.message || "Erro de conexão. Tente novamente mais tarde.";
+      const msg = err.response?.data?.message || "Erro de conexão.";
       setError(msg);
     }
   };
 
   return (
     <div className="flex min-h-screen w-full">
-      <div className="hidden md:block w-1/2 bg-gradient-to-r from-cyan-500 to-emerald-300">
-      </div>
+      <div className="hidden md:block w-1/2 bg-gradient-to-r from-cyan-500 to-emerald-300"></div>
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
         <div className="w-full max-w-md text-dark-green">
           <div className="mb-5">
@@ -59,7 +59,6 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            
             <div>
               <InputLabel 
                 placeholder="E-mail:" 
@@ -68,7 +67,6 @@ export default function Login() {
                 onChange={(e) => handleChange(e, "email")}
               />
             </div>
-
             <div>
               <InputLabel 
                 placeholder="Senha:" 
@@ -82,13 +80,11 @@ export default function Login() {
 
             <div className="flex flex-col gap-3 items-center">
               <Button label="Entrar" type="submit" />
-              
               <p className="text-sm text-dark-green">
                 Novo aqui? <a href="/register" className="font-bold text-cyan-600 hover:underline">Cadastre-se</a>
               </p>
             </div>
           </form>
-
         </div>
       </div>
     </div>

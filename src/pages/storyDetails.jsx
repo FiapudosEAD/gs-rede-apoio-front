@@ -17,29 +17,52 @@ export default function StoryDetails() {
     const [relato, setRelato] = useState(null);
     const [novoComentario, setNovoComentario] = useState("");
 
+    async function fetchDetails() {
+        try {
+            const response = await api.get(`/relatos/${id}`);
+            if (response.data.success) {
+                setRelato(response.data.data);
+            }
+        } catch (error) {
+            console.error("Erro ao carregar relato", error);
+        }
+    }
+
     useEffect(() => {
         if(!id) {
             navigate("/");
             return;
         }
-
-        async function fetchDetails() {
-            try {
-                const response = await api.get(`/relatos/${id}`);
-                if (response.data.success) {
-                    setRelato(response.data.data);
-                }
-            } catch (error) {
-                console.error("Erro ao carregar relato", error);
-            }
-        }
         fetchDetails();
     }, [id, navigate]);
+
+    const handleLikeRelato = async () => {
+        try {
+            await api.put(`/relatos/${id}/curtir`);
+            setRelato(prev => ({ ...prev, likes: (prev.likes || 0) + 1 }));
+        } catch (error) {
+            console.error("Erro ao curtir relato", error);
+        }
+    };
+
+    const handleLikeComentario = async (comentarioId) => {
+        try {
+            await api.put(`/comentarios/${comentarioId}/curtir`);
+            setRelato(prev => ({
+                ...prev,
+                comentarios: prev.comentarios.map(com => 
+                    com.id === comentarioId ? { ...com, likes: (com.likes || 0) + 1 } : com
+                )
+            }));
+        } catch (error) {
+            console.error("Erro ao curtir comentário", error);
+        }
+    };
 
     const handleComentar = async () => {
         if (!user || !user.id) {
             alert("Faça login para comentar");
-            navigate("/login");
+            navigate("/login", { state: { from: location.pathname } });
             return;
         }
 
@@ -52,7 +75,7 @@ export default function StoryDetails() {
                 comentario: novoComentario
             });
             setNovoComentario("");
-            window.location.reload();
+            fetchDetails();
         } catch (error) {
             console.error(error);
             alert("Erro ao comentar");
@@ -69,6 +92,7 @@ export default function StoryDetails() {
                     title={relato.titulo} 
                     content={relato.texto}
                     likeCount={relato.likes}
+                    onLike={handleLikeRelato}
                 />
                 <div className="bg-blue-accent p-5 mx-5 rounded-md flex flex-col gap-5 mb-10">
                     <InputLabel 
@@ -90,6 +114,7 @@ export default function StoryDetails() {
                             userName={com.nomeAutor} 
                             content={com.comentario} 
                             likeCount={com.likes}
+                            onLike={() => handleLikeComentario(com.id)} // Conecta o like do comentário
                         />
                     ))}
                 </div>
