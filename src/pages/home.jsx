@@ -53,7 +53,8 @@ export default function Home() {
                                 title={relato.titulo} 
                                 likeCount={relato.likes || 0} 
                                 commentCount={relato.comentarios ? relato.comentarios.length : 0}
-                                onLike={() => handleLike(relato.id)}
+                                onLike={() => handleLike(relato.id)} 
+                            />
                         </div>
                     ))
                 ) : (
