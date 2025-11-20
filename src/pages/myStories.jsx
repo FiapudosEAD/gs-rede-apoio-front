@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/header.jsx";
 import MiniStoryBox from "../components/miniStoryBox.jsx";
 import api from "../services/api.js";
@@ -59,7 +59,9 @@ export default function MyStories() {
                     ) : (
                         <div className="col-span-full text-center text-gray-600 mt-10">
                             <p>Você ainda não possui relatos.</p>
-                            <a href="/writeStory" className="text-blue-accent font-bold hover:underline">Escreva seu primeiro relato!</a>
+                            <Link to="/writeStory" className="text-blue-accent font-bold hover:underline">
+                                Escreva seu primeiro relato!
+                            </Link>
                         </div>
                     )}
                 </div>
