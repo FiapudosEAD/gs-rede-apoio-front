@@ -57,6 +57,7 @@ Antes de começar, você precisará ter instalado em sua máquina:
     O acesso estará disponível em `http://localhost:5173`.
 
 ## 📂 Estrutura de Pastas
+```
 src/
 ├── assets/         # Imagens e ícones (logo.svg)
 ├── components/     # Componentes reutilizáveis (Header, Button, StoryBox)
@@ -64,6 +65,7 @@ src/
 ├── pages/          # Páginas da aplicação (Login, Home, WriteStory)
 ├── services/       # Configuração do Axios (api.js)
 └── main.jsx        # Ponto de entrada
+```
 
 ## 🤝 Contribuição
 
