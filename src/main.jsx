@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import "./index.css";
 import { UserProvider } from "./contexts/UserContext.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx"; // Importe o componente
+import ProtectedRoute from "./components/protectedRoute.jsx";
 
 // Importação das Páginas
 import Home from "./pages/home.jsx";
